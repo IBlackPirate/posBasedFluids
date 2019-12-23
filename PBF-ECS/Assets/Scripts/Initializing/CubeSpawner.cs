@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using PBF.Scripts.Data;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
-namespace Assets.Scripts
+
+namespace PBF.Scripts.Initialization
 {
     public class CubeSpawner : MonoBehaviour, ISpawner
     {
@@ -10,18 +13,15 @@ namespace Assets.Scripts
         [SerializeField] private int HeightCount;
         [SerializeField] private int WidthCount;
         [SerializeField] private int LenghtCount;
-        [SerializeField] private float Radius = .5f;
 
-        private float Diameter { get { return 2 * Radius; } }
-
-        public Vector3[] Spawn()
+        public float3[] Spawn()
         {
-            Vector3[] result = new Vector3[FluidCount];
+            var result = new List<float3>(FluidCount);
             for (int i = 0; i < WidthCount; i++)
                 for (int j = 0; j < HeightCount; j++)
                     for (int k = 0; k < LenghtCount; k++)
-                        result[i] = new Vector3(i * Diameter, j * Diameter, k * Diameter);
-            return result;
+                        result.Add(new float3(i * GameData.FluidDiameter, j * GameData.FluidDiameter, k * GameData.FluidDiameter));
+            return result.ToArray();
         }
     }
 }
