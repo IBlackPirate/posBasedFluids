@@ -25,9 +25,9 @@ public class CollisionSystem : ComponentSystem
                         var penetrationDir = math.normalizesafe(p2.Value - pos1);
                         penetrationDir.x += GameData.Random.NextFloat(-.4f, .4f);
                         penetrationDir.z += GameData.Random.NextFloat(-.4f, .4f);
-                        penetrationDir.y += GameData.Random.NextFloat(-.3f, .3f);
+                        penetrationDir.y += GameData.Random.NextFloat(-.6f, .6f);
                         float penetrationDepth = GameData.FluidDiameter - math.length(pos1 - p2.Value);
-                        p2.Value += penetrationDir * penetrationDepth * .2f;
+                        p2.Value += penetrationDir * penetrationDepth * .5f;
                     }
                 });
             });

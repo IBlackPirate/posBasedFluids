@@ -15,7 +15,7 @@ namespace PBF.Scripts.Systems {
             deltaTime = Time.deltaTime;
             Entities.ForEach((ref Translation translation, ref FluidComponent fluid) => {
                 var delta = translation.Value - fluid.PrevPosition;
-                translation.Value += delta + fluid.Acceleration * deltaTime * deltaTime;
+                translation.Value += delta * fluid.Acceleration * deltaTime * deltaTime;
             });
         }
     }

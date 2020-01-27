@@ -33,6 +33,7 @@ public class BoundSystem : ComponentSystem
     private void OnExitBound(ref float fluidPosition, float boundPosition, ref FluidComponent fluid)
     {
         //fluidPosition = boundPosition;
-        fluid.Speed *= -0.3f;
+        fluid.Speed *= -0.8f;
+        fluid.GravitySpeed *= - 0.3f;
     }
 }

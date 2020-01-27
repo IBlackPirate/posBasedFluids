@@ -11,6 +11,7 @@ namespace PBF.Scripts.Components
     {
         public float3 PrevPosition;
         public float Speed;
+        public float GravitySpeed;
         public float Acceleration;
     }
 }

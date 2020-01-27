@@ -17,8 +17,8 @@ namespace PBF.Scripts.Systems
             Entities.ForEach((ref Translation translation, ref FluidComponent fluid) =>
             {
                 fluid.PrevPosition = translation.Value;
-                fluid.Speed += GameData.Gravity;
-                translation.Value += GameData.VectorDown * fluid.Speed * deltaTime;
+                fluid.GravitySpeed += GameData.Gravity;
+                translation.Value += GameData.VectorDown * fluid.GravitySpeed * deltaTime;
             });
         }
     }
