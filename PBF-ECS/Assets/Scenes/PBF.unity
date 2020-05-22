@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -130,6 +131,8 @@ GameObject:
   m_Component:
   - component: {fileID: 565600462}
   - component: {fileID: 565600461}
+  - component: {fileID: 565600464}
+  - component: {fileID: 565600463}
   m_Layer: 0
   m_Name: CubeSpawner
   m_TagString: Untagged
@@ -150,8 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HeightCount: 10
-  WidthCount: 5
-  LenghtCount: 5
+  WidthCount: 8
+  LenghtCount: 8
 --- !u!4 &565600462
 Transform:
   m_ObjectHideFlags: 0
@@ -166,6 +169,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &565600463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565600460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7d7495833204790ba1d3a8755397f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConversionMode: 0
+--- !u!114 &565600464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565600460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465267a6907c1ac47b2ebe6eca920c5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrefabEnity: {fileID: 9004509397666845294, guid: 6c0426f8cfc76454eb5b0898047d7a94,
+    type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,8 +221,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -282,7 +313,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815742305}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -301,19 +332,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableCollisions: 1
-  Gravity: 0.25
+  Gravity: 0.1
   fluidRadius: 0.5
-  fluidAcc: 0.7
-  fluidMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-  fluidMaterial: {fileID: 2100000, guid: 90d5a7e2d760ca441b6550e3ea16a428, type: 2}
+  fluidAcc: 0.8
+  density: 0.4
   spawner: {fileID: 565600461}
   bounds:
-    YBottomBound: -3
+    YBottomBound: 0
     YTopBound: 10
-    XLeftBound: -5
-    XRightBound: 10
-    ZForwardBound: 10
-    ZBackBound: -5
+    XLeftBound: -10
+    XRightBound: 15
+    ZForwardBound: 15
+    ZBackBound: -10
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

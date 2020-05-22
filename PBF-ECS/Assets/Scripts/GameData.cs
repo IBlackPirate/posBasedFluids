@@ -11,15 +11,17 @@ namespace PBF.Scripts.Data
     {
         public static bool EnableCollisions;
 
-        public static float Gravity;
+        public const float Gravity = 0.3f;
         public static float3 VectorDown => new float3(0, -1, 0);
 
         public static Bounds Bounds;
 
-        public static float FluidRadius;
+        public const float FluidRadius = 0.5f;
         public static float FluidDiameter => 2 * FluidRadius;
+        public const float Density = 0.04f;
+        public static float FluidAcceleration;
 
-        private static Unity.Mathematics.Random random = new Unity.Mathematics.Random(2007);
+        private static readonly Unity.Mathematics.Random random = new Unity.Mathematics.Random(2007);
         public static Unity.Mathematics.Random Random => random;
     }
 

@@ -3,23 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Entities;
 using Unity.Transforms;
+using Unity.Mathematics;
 using PBF.Scripts.Components;
 using PBF.Scripts.Data;
+using Unity.Jobs;
+using Unity.Burst;
 
 namespace PBF.Scripts.Systems
 {
-    public class GravitySystem : ComponentSystem
+    [BurstCompile]
+    public class GravitySystem : JobComponentSystem
     {
-        private float deltaTime;
-        protected override void OnUpdate()
+        protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
-            deltaTime = Time.deltaTime;
-            Entities.ForEach((ref Translation translation, ref FluidComponent fluid) =>
+            var ybound = GameData.Bounds.YBottomBound;
+            var deltaTime = Time.DeltaTime;
+            return Entities.ForEach((ref Translation translation, ref FluidComponent fluid) =>
             {
                 fluid.PrevPosition = translation.Value;
                 fluid.GravitySpeed += GameData.Gravity;
-                translation.Value += GameData.VectorDown * fluid.GravitySpeed * deltaTime;
-            });
+                fluid.GravitySpeed = math.clamp(fluid.GravitySpeed, 0, 3);
+                if (translation.Value.y != ybound)
+                    translation.Value += GameData.VectorDown * fluid.GravitySpeed * deltaTime;
+            }).Schedule(inputDeps);
         }
     }
 }

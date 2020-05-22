@@ -4,19 +4,21 @@ using UnityEngine;
 using Unity.Entities;
 using Unity.Transforms;
 using PBF.Scripts.Components;
-
+using Unity.Jobs;
+using Unity.Burst;
 
 namespace PBF.Scripts.Systems {
-    public class MovingSystem : ComponentSystem
+    [BurstCompile]
+    public class MovingSystem : JobComponentSystem
     {
-        private float deltaTime;
-        protected override void OnUpdate()
+        protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
-            deltaTime = Time.deltaTime;
-            Entities.ForEach((ref Translation translation, ref FluidComponent fluid) => {
-                var delta = translation.Value - fluid.PrevPosition;
-                translation.Value += delta * fluid.Acceleration * deltaTime * deltaTime;
-            });
+            var deltaTime = Time.DeltaTime;
+            return Entities.ForEach((ref Translation translation, ref FluidComponent fluid) =>
+            {
+                fluid.Speed = translation.Value - fluid.PrevPosition;
+                translation.Value += fluid.Speed * fluid.Acceleration * deltaTime * deltaTime;
+            }).Schedule(inputDeps);
         }
     }
 }
